@@ -3,7 +3,6 @@ import { FaCalendar, FaUser, FaClock } from 'react-icons/fa';
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { useRouter } from 'next/router';
-import { PrismicRichText } from '@prismicio/react';
 import { RichText } from 'prismic-dom';
 import Header from '../../components/Header';
 
@@ -41,8 +40,24 @@ interface PostProps {
 
 export default function Post({ post }: PostProps): JSX.Element {
   const router = useRouter();
+
   if (router.isFallback) {
     return <div>Carregando...</div>;
+  }
+
+  function calculateReadingTime(content): string {
+    const wordReadingPerMinute = 200;
+    let totalWords = 0;
+    let averageReadingtime = 0;
+
+    totalWords = content.reduce((acumulador, valorAtual) => {
+      const heading = valorAtual.heading?.split(' ');
+      const body = RichText.asText(valorAtual.body).split(' ');
+      return acumulador + (heading.length + body.length);
+    }, totalWords);
+
+    averageReadingtime = Math.ceil(totalWords / wordReadingPerMinute);
+    return `${averageReadingtime} min`;
   }
 
   return (
@@ -70,7 +85,8 @@ export default function Post({ post }: PostProps): JSX.Element {
                   {post.data.author}
                 </p>
                 <p>
-                  <FaClock />4 min
+                  <FaClock />
+                  {calculateReadingTime(post.data.content)}
                 </p>
               </div>
             </div>

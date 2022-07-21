@@ -42,10 +42,10 @@ Com o template já clonado, as dependências instaladas e o Prismic já configur
 - [x] *src/pages/_document.tsx*
     - [x] Nesse arquivo você deve configurar a importação da fonte Inter do Google Fonts.
     - [x] Os tamanhos utilizados são `Regular`, `Semi Bold` e `Bold`.
-- [ ] *src/pages/index.tsx*
-- [ ] *src/pages/home.module.scss*
-- [ ] *src/pages/post/[slug].tsx*
-- [ ] *src/pages/posts/post.module.scss);*
+- [x] *src/pages/index.tsx*
+- [x] *src/pages/home.module.scss*
+- [x] *src/pages/post/[slug].tsx*
+- [x] *src/pages/posts/post.module.scss);*
 - [x] *src/components/Header/index.tsx);*
     - [x] Nesse arquivo você deve renderizar a logo `spacetraveling`.
     - [x] Ela deve ser exportada do Figma e salva na pasta `public` na raiz do seu projeto para a correta utilização.
@@ -55,7 +55,7 @@ Com o template já clonado, as dependências instaladas e o Prismic já configur
     - [x] Nesse arquivo você deve implementar toda a estilização do Header da aplicação.
 - [x] *src/styles/global.scss*
     - [x] Nesse arquivo você deve implementar toda a estilização global da sua aplicação (ex.: variáveis das cores do seu projeto).
-- [ ] *src/styles/common.module.scss*
+- [c] *src/styles/common.module.scss*
 
 ## Especificação dos testes
 Para esse desafio, temos os seguintes testes:
@@ -73,3 +73,21 @@ Para esse desafio, temos os seguintes testes:
   - [x] should be able to return prismic post document using getStaticProps
   - [x] should be able to render post document info
   - [x] should be able to render loading message if fallback
+
+**Função para calcular o tempo de leitura**
+```
+function calculateReadingTime(content = []): string {
+    const wordReadingPerMinute = 200;
+    let totalWords = 0;
+    let averageReadingtime = 0;
+
+    totalWords = content.reduce((acumulador, valorAtual) => {
+      const heading = valorAtual.heading?.split(' ');
+      const body = RichText.asText(valorAtual.body).split(' ');
+      return acumulador + (heading.length + body.length);
+    }, totalWords);
+
+    averageReadingtime = Math.ceil(totalWords / wordReadingPerMinute);
+    return `${averageReadingtime} min`;
+  }
+```
