@@ -59,9 +59,9 @@ Para esse desafio, temos os seguintes testes:
 - [x] **Teste components/Header/index.tsx**
   - [x] should be able to render logo
   - [x] should be able to navigate to home page after a click
-- [ ] **Testes pages/Home/index.tsx**
+- [x] **Testes pages/Home/index.tsx**
   - [x] should be able to return prismic posts documents using getStaticProps
-  - [ ] should be able to render posts documents info
+  - [x] should be able to render posts documents info
   - [x] should be able to navigate to post page after a click
   - [x] should be able to load more posts if available
   - [x] should not be able to load more posts if not available
